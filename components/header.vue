@@ -1,4 +1,14 @@
-<script setup>
+<script>
+
+export default {
+    methods : {
+        loadSample() {
+            this.$emit('loadSampleGameAndVideo');
+        }
+
+    },
+    emits : ['loadSampleGameAndVideo']
+}
 
 </script>
 
@@ -35,6 +45,8 @@
                     <li>If you want to analyze a specific position from the video, use this awesome <a href="https://chrome.google.com/webstore/detail/chessvisionai-chess-posit/johejpedmdkeiffkdaodgoipdjodhlld" class="underline">Chessvision.ai extension</a>
                         and copy the fen of the position and paste it in.</li>
                 </ul>
+                <br/>
+                <button class="btn-secondary" @click="loadSample" >Click for sample video and game</button>
             </label>
     </label>
 </div></template>
