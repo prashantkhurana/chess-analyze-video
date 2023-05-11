@@ -3,26 +3,13 @@
 </script>
 
 <template>
-    <!-- <div class="flex bg-teal-500 items-center justify-center">
-        <div>
-            <h1>Analyze positions with video</h1>
-        </div>
-        <div class="absolute right-7">
-            How to Use?
-        </div>
-    </div> -->
     <div class="navbar bg-base-100 normal-case text-xl align-middle justify-center">
         <div>
             Analyze positions with video
         </div>
-        <!-- <div class="absolute right-12">
-            How to Use?
-        </div> -->
-        <!-- The button to open modal -->
         <label for="my-modal-4"
                class="btn absolute right-12">What Is this and how to use?</label>
 
-        <!-- Put this part before </body> tag -->
         <input type="checkbox"
                id="my-modal-4"
                class="modal-toggle" />

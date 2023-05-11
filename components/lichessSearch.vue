@@ -14,11 +14,9 @@ export default {
   mounted() {
     const input = this.$refs.input;
     input.setAttribute('size', input.getAttribute('placeholder').length);
-    console.log("mounted");
   },
   methods: {
     urlSubmitted() {
-      console.log("urlSubmitted");
       if (!this.isValidHttpUrl(this.chessLink)) {
         try {
           const chess = new Chess();
@@ -30,8 +28,6 @@ export default {
               color: 'white',
               url: "",
             }
-            console.log("fen");
-
             this.$emit('gameUpdated', gameDetails);
             return;
           }
@@ -45,12 +41,10 @@ export default {
             color: 'white',
             url: "",
           }
-          console.log(gameDetails);
           this.$emit('gameUpdated', gameDetails);
           return;
 
         } catch (error) {
-          console.log("prashant error" + error);
           this.parsingError = true;
         }
       }
@@ -59,7 +53,6 @@ export default {
         return;
       }
       const pgn = this.getPgn(gameDetails).then(pgn => {
-        console.log(pgn);
         gameDetails = {
           ...gameDetails,
           pgn: pgn,
@@ -82,15 +75,10 @@ export default {
     },
     getGameDetailsFromUrl(url) {
       this.parsingError = false;
-      //https://lichess.org/z5njiep5/black
-      //https://lichess.org/sgD03Zek/black
-      //https://lichess.org/9hzzbVsY
-      //https://lichess.org/Co6jdTdK
       const regExp = /https:\/\/lichess.org\/(.*)\/?(.*)$/;
       var match = url.match(regExp);
 
       if (match && match[1].length == 8) {
-        console.log(match.length);
         return {
           gameId: match[1],
           color: match.length == 3 ? match[2] : 'white'
@@ -107,11 +95,7 @@ export default {
         method, headers,
         query: { pgnInJson: true, tags: false, clocks: false, evals: false }
       })
-      console.log(data.value.pgn);
       return data.value.pgn;
-      // console.log("https://lichess.org/analysis/pgn/" + this.pgn);
-
-
     }
 
   }
