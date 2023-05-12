@@ -17,6 +17,7 @@ export default {
   },
   methods: {
     urlSubmitted() {
+      useTrackEvent('lichessSearch');
       if (!this.isValidHttpUrl(this.chessLink)) {
         try {
           const chess = new Chess();
@@ -31,7 +32,7 @@ export default {
             this.$emit('gameUpdated', gameDetails);
             return;
           }
-          chess.loadPgn(this.chessLink, { strict: false});
+          chess.loadPgn(this.chessLink, { strict: false });
           const headers = chess.header();
           for (const key in headers) {
             chess.removeHeader(key);
@@ -106,10 +107,10 @@ export default {
 <template>
   <div class="flex justify-start gap-4">
     <textarea ref="input"
-           @keyup.enter="urlSubmitted"
-           v-model="chessLink"
-           placeholder="Enter Lichess game or paste pgn/fen."
-           class="border  border-sky-500" />
+              @keyup.enter="urlSubmitted"
+              v-model="chessLink"
+              placeholder="Enter Lichess game or paste pgn/fen."
+              class="border  border-sky-500" />
     <button @click="urlSubmitted"
             class="btn-primary font-bold rounded-md">Open For Analysis</button>
     <p v-if="parsingError">{{ errorText }}</p>
