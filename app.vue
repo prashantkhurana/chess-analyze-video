@@ -36,6 +36,12 @@ this.videoUrl = "https://www.youtube.com/embed/11hlPJYNX_s";
 </script>
 
 <template >
+  <Title>
+    Analyze chess positions with video. Watch video and analyze side by side.
+  </Title>
+  <Meta>
+    Analyze chess positions with video. Watch video and analyze side by side.
+  </Meta>
   <div class="h-screen">
     <Header class="flex flex-row justify-center h-10 align-middle" @load-sample-game-and-video="loadSampleGameAndVideo"></Header>
     <div class="flex flex-row justify-between m-5">
