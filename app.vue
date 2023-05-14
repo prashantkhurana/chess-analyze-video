@@ -1,4 +1,5 @@
 <script>
+import {getMovesFromPgn } from 'utils/utils';
 export default defineNuxtComponent({
   data() {
     return {
@@ -20,7 +21,8 @@ export default defineNuxtComponent({
     },
     getLichessUrl(gameDetails) {
       if (gameDetails.fen) 
-      { 
+      {
+        
         this.lichessUrl = "https://lichess.org/analysis/" + gameDetails.fen;
         return;
       }
@@ -30,7 +32,14 @@ export default defineNuxtComponent({
       this.lichessUrl = `https://lichess.org/analysis/pgn/1. e4 c5 2. Nf3 Nc6 3. Bb5 g6 4. Nc3 Bg7 5. O-O Nf6 6. Re1 O-O 7. Bf1 d6 8. h3 a6 9. d3 b5 10. Be3 Bb7 11. Qd2 Re8 12. Ne2 d5 13. e5 Nd7 14. e6 fxe6 15. Ng5 d4 16. Bf4 Nf8 17. Bh2 e5 18. Ng3 Rc8 19. f4 exf4 20. Qxf4 Qd5 21. Re4 Bh6 22. h4 Ne6 23. Qg4 Nxg5 24. hxg5 Bxg5 25. Rae1 Be3+ 26. Kh1 Rf8 27. c4 bxc4 28. dxc4 Qf7 29. Bd3 Nb4 30. R4xe3 dxe3 31. Rxe3 Nxd3 32. Rxd3 Qf2 0-1`;
 this.videoUrl = "https://www.youtube.com/embed/11hlPJYNX_s";
     }
-  }
+  },
+  mounted(){
+    if(this.$route.query.pgn) {
+      console.log(this.lichessUrl);
+      this.lichessUrl = "https://lichess.org/analysis/pgn/" + getMovesFromPgn(this.$route.query.pgn);
+       console.log(this.lichessUrl);
+    }
+  },
 })
 
 </script>

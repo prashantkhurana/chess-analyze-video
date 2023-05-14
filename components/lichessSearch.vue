@@ -1,6 +1,6 @@
 <script>
 import { Chess, validateFen } from 'chess.js';
-
+import { getMovesFromPgn } from 'utils/utils';
 export default {
   data() {
     return {
@@ -20,7 +20,6 @@ export default {
       useTrackEvent('lichessSearch');
       if (!this.isValidHttpUrl(this.chessLink)) {
         try {
-          const chess = new Chess();
           const { ok, error } = validateFen(this.chessLink);
           if (ok) {
             let gameDetails = {
@@ -32,13 +31,10 @@ export default {
             this.$emit('gameUpdated', gameDetails);
             return;
           }
-          chess.loadPgn(this.chessLink, { strict: false });
-          const headers = chess.header();
-          for (const key in headers) {
-            chess.removeHeader(key);
-          }
+
+          const moves = getMovesFromPgn(this.chessLink);
           let gameDetails = {
-            pgn: chess.pgn().replaceAll(/{.*?}/gm, ""),
+            pgn: moves,
             color: 'white',
             url: "",
           }
@@ -46,6 +42,7 @@ export default {
           return;
 
         } catch (error) {
+          console.log(error);
           this.parsingError = true;
         }
       }
@@ -76,19 +73,22 @@ export default {
     },
     getGameDetailsFromUrl(url) {
       this.parsingError = false;
-      const regExp = /https:\/\/lichess.org\/(.*)\/?(.*)$/;
-      var match = url.match(regExp);
-
-      if (match && match[1].length == 8) {
-        return {
-          gameId: match[1],
-          color: match.length == 3 ? match[2] : 'white'
-        }
-      } else {
+      if (url.indexOf("https://lichess.org/") === -1) {
         this.parsingError = true;
         return "error";
       }
+      const gameIdAndColor = url.substring(this.endIndexOf(url, "https://lichess.org/") + 1);
+      return {
+        gameId: gameIdAndColor.split("/")[0],
+        color: gameIdAndColor.indexOf("/") !== -1 ? gameIdAndColor.split("/")[1] : 'white'
+      }
+
     },
+    endIndexOf(string, substring) {
+      var io = string.indexOf(substring);
+      return io == -1 ? -1 : io + substring.length -1 ;
+    },
+
     async getPgn(gameDetails) {
       const headers = { "accept": "application/json" };
       let method = "GET"

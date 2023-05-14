@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { resolve } from 'path'
+
 export default defineNuxtConfig({
     css: ['~/assets/css/main.css'],
     postcss: {
@@ -10,5 +12,8 @@ export default defineNuxtConfig({
       modules: ['nuxt-gtag'],
       gtag: {
         id: 'G-QHWN23BMBJ'
+      },
+      alias: {
+        'utils': resolve(__dirname, './utils')
       }
 })
