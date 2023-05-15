@@ -35,9 +35,11 @@ this.videoUrl = "https://www.youtube.com/embed/11hlPJYNX_s";
   },
   mounted(){
     if(this.$route.query.pgn) {
-      console.log(this.lichessUrl);
       this.lichessUrl = "https://lichess.org/analysis/pgn/" + getMovesFromPgn(this.$route.query.pgn);
-       console.log(this.lichessUrl);
+    }
+
+    if(this.$route.query.videoId) {
+      this.videoUrl = "https://www.youtube.com/embed/" + this.$route.query.videoId;
     }
   },
 })
