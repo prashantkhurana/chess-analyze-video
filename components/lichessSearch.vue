@@ -19,6 +19,7 @@ export default {
     urlSubmitted() {
       useTrackEvent('lichessSearch');
       if (!this.isValidHttpUrl(this.chessLink)) {
+        useTrackEvent('pgn/fen');
         try {
           const { ok, error } = validateFen(this.chessLink);
           if (ok) {
@@ -43,6 +44,7 @@ export default {
 
         } catch (error) {
           console.log(error);
+          useTrackEvent('error');
           this.parsingError = true;
         }
       }
@@ -57,6 +59,7 @@ export default {
           url: this.chessLink,
 
         }
+        useTrackEvent('pgn');
         this.$emit('gameUpdated', gameDetails);
       });
     },
