@@ -3,6 +3,7 @@
 export default {
     methods : {
         loadSample() {
+            useTrackEvent('loadSampleGameAndVideo');
             this.$emit('loadSampleGameAndVideo');
         }
 
