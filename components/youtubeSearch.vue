@@ -14,6 +14,7 @@ export default {
     },
     methods: {
         urlSubmitted() {
+            useTrackEvent('youtubeSearch');
             const videoId = this.getVideoIdFromUrl(this.youtubeUrl);
             if (this.parsingError) {
                 return;
