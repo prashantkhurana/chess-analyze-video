@@ -1,14 +1,17 @@
 <script>
 
 export default {
-    methods : {
+    methods: {
         loadSample() {
             useTrackEvent('loadSampleGameAndVideo');
             this.$emit('loadSampleGameAndVideo');
+        },
+        shareUrlToClipboard() {
+            this.$emit('shareUrlToClipboard');
         }
 
     },
-    emits : ['loadSampleGameAndVideo']
+    emits: ['loadSampleGameAndVideo', 'shareUrlToClipboard']
 }
 
 </script>
@@ -19,7 +22,7 @@ export default {
             Analyze positions with video
         </div>
         <label for="my-modal-4"
-               class="btn absolute right-12">What Is this and how to use?</label>
+               class="btn absolute right-40">What Is this and how to use?</label>
 
         <input type="checkbox"
                id="my-modal-4"
@@ -41,13 +44,27 @@ export default {
                         <li>Note the game cannot be in a broadcast or study and should have a url like
                             lichess.org/gameId</li>
                     </ul>
-                    <li>If the game is on chess.com, get the pgn and paste it (or <a href="https://lichess.org/paste" class="underline">import</a>  the game to lichess and paste the
+                    <li>If the game is on chess.com, get the pgn and paste it (or <a href="https://lichess.org/paste"
+                           class="underline">import</a> the game to lichess and paste the
                         url)</li>
-                    <li>If you want to analyze a specific position from the video, use this awesome <a href="https://chrome.google.com/webstore/detail/chessvisionai-chess-posit/johejpedmdkeiffkdaodgoipdjodhlld" class="underline">Chessvision.ai extension</a>
+                    <li>If you want to analyze a specific position from the video, use this awesome <a
+                           href="https://chrome.google.com/webstore/detail/chessvisionai-chess-posit/johejpedmdkeiffkdaodgoipdjodhlld"
+                           class="underline">Chessvision.ai extension</a>
                         and copy the fen of the position and paste it in.</li>
                 </ul>
-                <br/>
-                <button class="btn-secondary" @click="loadSample" >Click for sample video and game</button>
+                <br />
+                <button class="btn-secondary"
+                        @click="loadSample">Click for sample video and game</button>
             </label>
-    </label>
-</div></template>
+        </label>
+        <div 
+        
+        >
+            <div class="btn absolute right-12" @click="shareUrlToClipboard">
+            Share
+        </div>
+        </div>
+        
+
+    </div>
+</template>
