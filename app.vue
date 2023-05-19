@@ -37,7 +37,7 @@ export default defineNuxtComponent({
       this.videoUrl = "https://www.youtube.com/embed/11hlPJYNX_s";
     },
     shareUrlToClipboard() {
-      const url = location.protocol + '//' + location.host + '/?videoId=' + this.videoId + '&pgn=' + this.pgn;
+      const url = location.protocol + '//' + location.host + (this.videoId ?'/?videoId=' + this.videoId : '') + (this.pgn ? '&pgn=' + this.pgn : '')
       this.copyURL(url);
     },
     async copyURL(mytext) {
